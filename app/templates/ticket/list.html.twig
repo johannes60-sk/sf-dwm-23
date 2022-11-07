@@ -19,6 +19,40 @@
 </div>
 {% endblock %} #}
 
-{% for ticket in tickets %}
-    {{ticket.label}} <br />
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container mt-5">
+
+
+<table class="table">
+  <thead>
+    <tr class=" table-dark">
+      <th scope="col">#</th>
+      <th scope="col">Ticket numero</th>
+      <th scope="col">Lien</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {% for ticket in tickets %}
+    <tr>
+      <th scope="row"> {{ticket.id}}</th>
+      <td> {{ticket.label}}</td>
+      <td>
+        <a class="link" href="{{ path('tickets_show', {ticketId: ticket.id })}}">Voir</a>
+      </td>
+      <td>
+        <a class="btn "><i class="bi bi-trash3-fill text-danger"></i></a>
+        <a class="btn"><i class="bi bi-pencil-fill text-danger"></i></a>
+      </td>
+    
+    </tr>
 {% endfor %}
+  </tbody>
+</table>
+
+<a class="btn btn-success mt-2">Ajouter un ticket</a></div>
+
+{% endblock %}

@@ -25,5 +25,27 @@ class TicketController extends AbstractController
         ]);
     }
 
+    #[Route('/ticketId/{id}', name: 'tickets_show')]
+    public function show(ManagerRegistry $doctrine, int $id): Response{
+
+        $ticket = $doctrine->getRepository(Tickets::class)->find($id);
+
+        if(!$ticket){
+            throw $this->createNotFoundException(
+
+               'No ticket found for id'  . $id
+            );
+        }
+
+        return $this->render('ticket/show.html.twig', [
+
+            'ticket' => $ticket,
+        ]);
+
+    }
+
    
 }
+
+
+?>

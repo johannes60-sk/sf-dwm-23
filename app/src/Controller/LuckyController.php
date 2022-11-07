@@ -7,7 +7,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/lucky')]
-
 class LuckyController extends AbstractController
 {
     #[Route('/number/{max}', name: "lucky_number_max")]   // on dit la qu'apres "number" on a une variable | On donne egalement un nom a la route
