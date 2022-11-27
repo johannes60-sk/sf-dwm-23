@@ -10,7 +10,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb://root:root@mongo:27017/b3?authSource=admin', {
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true
 }, (error) => {
     if(error){
@@ -26,18 +26,18 @@ const studentRouter = require('./routes/students')
 
 app.use('/students', studentRouter);
 
-app.get('/classes', route_class);
+app.use('students/:id', studentRouter);
 
-app.post('/classes', route_class);
 
-app.get('/:id', route_class);
+app.use('/classes', route_class);
 
-app.delete('/:id', route_class);
+app.use('/classes/:id', route_class);
 
-app.put('/:id', route_class);
+
+// app.post('/classes', route_class);
 
 app.listen(4500, ()=>{
 
-    console.log("server is running on http://127.0.1:4500");
+    console.log("server is running on http://127.0.0.1:4500");
 })
 

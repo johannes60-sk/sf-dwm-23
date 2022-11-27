@@ -12,6 +12,12 @@ const studentSchema = new mongoose.Schema(
             type: String,
             require: [true, 'Entrer un nom'], // renvoie un message disant qu'il faut entre un nom
             trim: true
+        },
+
+        classe: {
+            type: String,
+            require: [true, 'Entrer le nom de votre classe'],
+            trim: true
         }
     },
 
