@@ -6,7 +6,7 @@ const classeModel = require('../models/classe')
 
 const router = express.Router();
 
-// Route pour recuperer tout les etudiants
+// Route pour creer tout les etudiants
 
 router.post('/', async (req, res) => {
 
