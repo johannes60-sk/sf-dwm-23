@@ -9,6 +9,7 @@
     <tr class=" table-dark">
       <th scope="col">#</th>
       <th scope="col">Ticket numero</th>
+      <th scope="col">Description</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -18,14 +19,16 @@
     <tr>
       <th scope="row"> {{ticket.id}}</th>
       <td> {{ticket.label}}</td>
+      <td> {{ticket.description}}</td>
       <td>
         <a class="btn "><i class="bi bi-trash3-fill text-danger"></i></a>
-        <a class="btn"><i class="bi bi-pencil-fill text-danger"></i></a>
+        {# <a class="btn"><i class="bi bi-pencil-fill text-danger"></i></a> #}
+        <a class="btn" href="{{ path('ticket_edit', {id: ticket.id})}}"><i class="bi bi-pencil-fill text-danger"></i></a>
       </td>
     </tr>
   </tbody>
 </table>
 
-<a class="btn btn-danger">Retour</a>
+<a class="btn btn-danger" href="{{ path('tickets_list') }}">Retour</a>
 
 {% endblock %}

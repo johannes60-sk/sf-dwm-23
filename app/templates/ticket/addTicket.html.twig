@@ -1,0 +1,51 @@
+{# {{ form(form) }} #}
+
+{% extends 'base.html.twig' %}
+{% block body %}
+
+
+    <div class="m-3">
+        <a class="btn btn-danger" href="{{ path('tickets_list') }}"><i class="bi bi-arrow-left"></i> Retour</a>
+    </div>
+
+   <div class="container mt-4 col-md-6"> 
+
+        {{ form_start(form, {'attr': {'class': 'row'}}) }}
+
+            <div class"form-group ">
+
+                <label class="fw-bold">{{ form_label(form.label, 'Label ticket') }}</label>
+                {{ form_widget(form.label, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.label)}}
+
+            </div>
+
+            <div class="form-group mt-3 ">
+
+                <label class="fw-bold">{{ form_label(form.description) }}</label>
+                {{ form_widget(form.description, {'attr': {'class': 'form-control'}})}}
+                {{ form_errors(form.description)}}
+            </div>
+
+            <div class=" form-group mt-3">
+
+                {{ form_label(form.save )}}
+                <a href="{{ path('tickets_list') }}">
+
+                    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}} )}}
+
+                </a>
+            </div>
+
+
+        {{ form_end(form) }}
+
+
+   </div>
+   
+    {# {{ form_widget(form) }} #}
+    
+
+{% endblock %}
+
+
