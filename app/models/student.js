@@ -14,11 +14,24 @@ const studentSchema = new mongoose.Schema(
             trim: true
         },
 
-        classe: {
+        // classe: {
+        //     type: String,
+        //     require: [true, 'Entrer le nom de votre classe'],
+        //     trim: true
+        // }
+        email: {
             type: String,
-            require: [true, 'Entrer le nom de votre classe'],
+            require: true,
+            trim: true
+        
+        },
+
+        password: {
+            type: String,
+            require: true,
             trim: true
         }
+
     },
 
     // {

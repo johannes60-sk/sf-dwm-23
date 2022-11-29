@@ -115,7 +115,7 @@ router.put('/:id', async (req, res) => {
     let classe = await classeModel.findOneAndUpdate({
         _id: id                     // pour savoir wuel element on met a jour dans le tableau 
     }, {
-      name                         // avec quel element on met a jour
+      name                        // avec quel element on met a jour
     }, {
       new: true          
     });

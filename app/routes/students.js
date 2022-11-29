@@ -1,10 +1,103 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
+const router = express.Router();
 
 const studentModel = require('../models/student');
 
 const classeModel = require('../models/classe')
 
-const router = express.Router();
+
+
+// Route Register
+
+router.post('/register',  async(req, res) => {
+
+    const {email, email_cfg, password, password_cfg, firstname, lastname} = req.body;
+
+    if((typeof email === 'undefined' || email.trim() === "") || (typeof password === 'undefined' & password.trim() === "" )){
+
+        return(res.status(500).json({
+            msg: "Il faut remplir tous le champs !"
+        }))
+    }
+
+    if(email !== email_cfg || password !== password_cfg){
+
+        return(res.status(500).json({
+            msg: "Les confirmations ne sont pas exactes !"
+        }))
+    }
+
+    try{
+
+        let existeStudent = await studentModel.findOne({email});
+
+        if(existeStudent){
+        
+            return res.status(500).json({
+                msg: "L'utilisateur existe deja "
+            })
+        }
+
+        let student = await studentModel.create({
+
+            email: email.trim(),
+            password: bcrypt.hashSync(password.trim(), 10),
+            firstname: typeof firstname !== 'undefined' ? firstname.trim() : "",
+            lastname: typeof lastname !== 'undefined' ? lastname.trim() : "",
+        });
+    
+        return(res.status(200).json(student));
+    }catch(error){
+        console.log(error);
+        return res.status(500).json({
+            msg: "Les confirmations ne sont pas exactes"
+        })
+    }
+});
+
+// Route Login
+
+router.post('/login',  async(req, res) => {
+
+    const {email, password} = req.body;
+
+    if((typeof email === 'undefined' || email.trim() === "") || (typeof password === 'undefined' & password.trim() === "" )){
+
+        return(res.status(500).json({
+            msg: "Il faut remplir tous le champs !"
+        }))
+    }
+    
+    try{
+
+        let existeStudent = await studentModel.findOne({email: email.trim()});
+
+        if(!existeStudent){
+        
+            return res.status(500).json({
+                msg: "Erreur d'authentification !"
+            });
+        }
+
+       let  compare = bcrypt.compareSync(password.trim(), existeStudent.password );
+
+       if(!compare){
+            return res.status(500).json({
+                msg: "Erreur d'authentification !"
+            });
+       }
+
+       return res.status(200).json(existeStudent);
+    }catch(error){
+
+        return res(500).json({
+            msg: error
+        })
+    }
+
+});
+
 
 // Route pour creer tout les etudiants
 
