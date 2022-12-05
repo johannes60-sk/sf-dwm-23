@@ -1,12 +1,36 @@
 const { response } = require('express');
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
-const classeModel = require('../models/classe')
+const classeModel = require('../models/classe');
+const student = require('../models/student');
 
 const router = express.Router();
 // let classes = [];
 
 // Route pour recuperer toute les classes
+
+router.post('/addStudent', async(req, res) => {
+  
+  const {studentId, classeId} = req.body;
+
+  try{
+
+  const classes = await classeModel.findOneAndUpdate({
+    _id: classeId
+  }, {
+      students: [studentId]
+  },{
+    new:true
+  }).populate('students');
+
+  return res.status(200).json(classes);
+
+}catch(error){
+
+  return res.status(500).json(error);
+}
+
+});
 
 router.get('/', async (req, res) => {
 

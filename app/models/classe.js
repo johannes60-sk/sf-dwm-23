@@ -14,7 +14,8 @@ const classeSchema = new mongoose.Schema(
         type: Number,
         required: true,
         trim: true
-    }
+    },
+    students: [{type: mongoose.Schema.Types.ObjectId, ref: 'Student'}]
 }, {
     timestamps:{
         createdAt: 'created_at',

@@ -26,11 +26,24 @@ const studentSchema = new mongoose.Schema(
         
         },
 
+        classe: {type: mongoose.Schema.Types.ObjectId, ref: 'classe'},
+
+        email_cfg:{
+            type: String,
+            require: true,
+            trim: true
+        },
         password: {
             type: String,
             require: true,
             trim: true
+        },
+        password_cfg:{
+            type: String,
+            require: true,
+            trim: true
         }
+
 
     },
 

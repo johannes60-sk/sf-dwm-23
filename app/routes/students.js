@@ -88,6 +88,7 @@ router.post('/login',  async(req, res) => {
             });
        }
 
+    //    req.session.student = existeStudent;
        return res.status(200).json(existeStudent);
     }catch(error){
 
@@ -229,9 +230,11 @@ router.put('/:id', async (req, res) => {
 
 })
 
+// router.get('/me' ,async (req, res) =>{
 
+//     return res.status(200).json(req.session.student);
 
-
+// });
 
 
 
@@ -239,3 +242,4 @@ router.put('/:id', async (req, res) => {
 
 
 module.exports = router;
+// req.session.student = students
