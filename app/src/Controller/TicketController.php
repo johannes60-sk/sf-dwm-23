@@ -60,6 +60,9 @@ class TicketController extends AbstractController
         $form->handleRequest($request);      // When the user submits the form, handleRequest() recognizes this and immediately writes the submitted data back into the entity(Tickets) and dueDate properties of the $task object. 
 
         if($form->isSubmitted()){
+            
+            $ticket = $form->getData(); 
+            $ticket->setUser($this->getUser());
 
             $entityManager = $doctrine->getManager(); 
 
